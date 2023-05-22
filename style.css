@@ -1,0 +1,176 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box; /* respeita as bordas, tamanhos das caixas,
+  caso contrário, o tamanho de preenchimento seria somado ao tamanho da caixa*/
+}
+
+::-webkit-scrollbar {
+  width: 1.3rem;
+}
+
+::-webkit-scrollbar-track {
+  background-color: #2c2c31;
+}
+
+::-webkit-scrollbar-thumb{
+  background-color: #EAEAEA;
+}
+
+:root{
+  font-size: 110%;
+  --bg-color: hsl(240, 8%, 8%);
+  --text-title-color:  #EAEAEA;
+  --text-secondary-color:#BEBEBF;
+}
+
+@keyframes entering {
+  from {
+    opacity: 0;
+    transform: translateY(-200px) 
+  }
+
+  to {
+    opacity: 1 ;
+    transform: translateY(0px) 
+  }
+}
+
+body {
+  background-color: var(--bg-color) ;
+  color:var(--text-title-color);
+  font-family: 'Roboto', sans-serif;
+
+  display: grid; /* habilitar funções grid*/
+  grid-template-areas: "profile timeline"; /* dar nome às áreas*/
+  grid-template-columns: 1fr 1fr; /* definir colunas*/
+  grid-template-columns: 100vh; /*definir linhas*/
+}
+
+nav {
+  padding: 6.4rem;
+  grid: timeline;  
+  height: 100vh;
+  overflow-y: scroll; /* quando conteudo nao couber na vertical, rola para baixo*/
+  animation: entering 0.7s ease-in-out;
+}
+
+.memory{
+  display: flex;
+  flex-direction: column;
+  gap: 1.6rem;
+  text-decoration: none;
+  margin-bottom: 6.4rem;
+}
+
+.memory small {
+  color: var(--text-secondary-color);
+  font-size: 1.2rem;
+}
+
+.memory h1 {
+  font-size: 3.2rem;
+  color: var(--text-title-color);
+}
+
+.memory img {
+  width: 100%; /*sempre fica em 100% da largura da tela ( colado nas laterias)*/
+  height: 20rem; 
+  object-fit: cover; /*pra não ficar tão esticada. essa propriedade faz a imagem ficar como se fosse uma capa */
+  border-radius: 0.8rem;
+
+  transition: transform 0.3s ease-in-out;
+}
+
+.memory img:hover{
+  transform: scale(1.1); /* zoom de 10%*/  
+}
+
+.memory div {
+  width: 100%; 
+  height: 20rem;
+  overflow: hidden; /*o conteúdo que exceder após o zoom vai ficar escondido */
+  border-radius: 0.8rem;
+}
+
+.memory p {
+  font-size: 1.8rem;
+  color: var(--text-secondary-color);
+  line-height: 2.8rem;
+}
+
+aside {
+  grid: profile;
+    
+  display: flex; /* habilitar funções flex*/
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 2rem;
+  
+  border-right: 1px solid;
+  border-image: linear-gradient(#727275, #2c2c31) 1;
+
+  background-image: url("./assets/background.svg");
+  background-position: top right;
+  background-repeat: no-repeat;
+  background-size: auto 100%;  
+}
+
+aside * { /* selecionando todos elementos dentro do aside*/
+  animation: entering 0.7s ease-in-out;
+}
+
+aside img:nth-child(2) {
+  width: 20rem;
+  height: 20rem;
+  border-radius: 50%;
+
+  border: 8px solid transparent;
+  background: linear-gradient(#de9e33, #ed5636, #633bbc ) padding-box,
+    linear-gradient(260deg, #de9e33, #ed5636, #633bbc) border-box;
+}
+
+aside p {
+  font-size: 3.2rem;
+  text-align: center;
+}
+
+aside span {
+  font-size: 1.2rem;
+  color: #9e9ea0;
+}
+
+@media (max-width: 768px) {
+  :root {
+    font-size: 56.62%; /*regra de 3: 
+      1rem = 16px ------------------- 100%
+      1 rem = 10(novo padrão) -------x 
+      x =aprox 62.5%.
+      Se ao inves de 10 forem 9, 56.62%
+      */
+  }
+
+  body{
+    grid-template-columns: 1fr;
+    grid-template-rows: 0.2fr 0.8fr;
+    grid-template-areas:
+    "profile"
+    "timeline";
+  }
+
+  aside {
+    border-right: none;
+    padding: 3.2rem 1.2rem;
+  }
+
+  nav {
+    overflow-y: visible;
+    padding: 2.2rem;
+  }
+
+}
+
+
+
+
